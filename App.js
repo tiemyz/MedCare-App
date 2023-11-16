@@ -5,7 +5,7 @@ import LoginScreen from './screens/LoginScreen';
 import CadastroScreen from './screens/CadastroScreen';
 import MedicoDashboard from './screens/MedicoDashboard';
 import PacienteDashboard from './screens/PacienteDashboard';
-import HomeScreen from './screens/HomeScreen'; // Certifique-se de importar a tela HomeScreen
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +16,7 @@ const App = () => (
       <Stack.Screen name="Cadastro" component={CadastroScreen} />
       <Stack.Screen name="MedicoDashboard" component={MedicoDashboard} />
       <Stack.Screen name="PacienteDashboard" component={PacienteDashboard} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );

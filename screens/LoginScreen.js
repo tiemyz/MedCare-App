@@ -29,8 +29,8 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const handleCadastro = () => {
-    navigation.navigate('Cadastro');
-  };
+    navigation.navigate('Home');
+  };  
 
   return (
     <View>

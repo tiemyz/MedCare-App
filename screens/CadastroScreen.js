@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
 const CadastroScreen = ({ route, navigation }) => {
-  // Certifique-se de que route.params está definido antes de desestruturar
+
+
   const { userType } = route.params || {};
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
