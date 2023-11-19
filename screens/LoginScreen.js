@@ -1,49 +1,66 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, ImageBackground, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import authAPI from '../authAPI';
+
+const api = authAPI();
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    // Implementar lógica de login aqui
-    // Exemplo: validar campos, chamar API, etc.
-
-    // Supondo que você tenha uma função de login assíncrona
     try {
-      // Chamar a função de login aqui
-      // await api.realizarLogin({ email, senha });
+      setLoading(true); 
 
-      // Redirecionar para a tela apropriada após o login
-      // Você deve ter alguma lógica aqui para determinar se o usuário é médico ou paciente
-      // Exemplo: se o email contiver "@medico.com", então é um médico
-      if (email.includes('@medico.com')) {
-        navigation.navigate('MedicoDashboard');
+      const loginResponse = await api.realizarLoginAPI(email, senha);
+      console.log('Resposta do login:', loginResponse); 
+
+      if (loginResponse.token) {
+        console.log('Login bem-sucedido. Redirecionando...');
+
+        const tipoUsuario = email.includes('@medico.com') ? 'medico' : 'paciente';
+
+        if (tipoUsuario === 'medico') {
+          console.log('Usuário é um médico. Redirecionando para MedicoDashboard.');
+          navigation.navigate('MedicoDashboard');
+        } else {
+          console.log('Usuário é um paciente. Redirecionando para PacienteDashboard.');
+          navigation.navigate('PacienteDashboard');
+        }
       } else {
-        navigation.navigate('PacienteDashboard');
+        console.error('Erro ao fazer login:', loginResponse.message);
       }
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      // Tratar erros de login, exibir mensagem, etc.
+      console.error('Erro ao fazer login:', error.message);
+    } finally {
+      setLoading(false); 
     }
-  };
-
-  const handleCadastro = () => {
-    navigation.navigate('Home');
   };
 
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../assets/banner.png')} style={styles.banner}>
-        {/* Logo */}
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={setSenha}
+        />
+        <TouchableOpacity onPress={handleLogin} disabled={loading}>
+          <View>
+            <Text style={styles.buttonText}>{loading ? 'Entrando...' : 'Entrar'}</Text>
+          </View>
+        </TouchableOpacity>
 
-        {/* Conteúdo do banner */}
-        <Text style={styles.title}>Login Screen</Text>
-        <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
-        <TextInput style={styles.input} placeholder="Senha" secureTextEntry value={senha} onChangeText={setSenha} />
-        <Button title="Entrar" onPress={handleLogin} />
-        <TouchableOpacity onPress={handleCadastro}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Text style={styles.cadastroLink}>Não tem conta? Cadastre-se</Text>
         </TouchableOpacity>
       </ImageBackground>
@@ -59,20 +76,10 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: '100%',
-    height: '100%', // Alterado para cobrir toda a tela
+    height: '100%',
     resizeMode: 'cover',
-    justifyContent: 'center', // Alinha os elementos no centro
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-  logo: {
-    width: 50,
-    height: 50,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 10,
-    color: 'white', // Adicionado para melhorar a legibilidade no banner
   },
   input: {
     height: 40,
@@ -81,7 +88,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 10,
-    backgroundColor: 'white', // Adicionado para melhorar a legibilidade no banner
+    backgroundColor: 'white',
+  },
+  buttonText: {
+    color: 'blue',
+    marginTop: 10,
   },
   cadastroLink: {
     color: 'blue',

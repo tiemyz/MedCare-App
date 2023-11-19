@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import authAPI from '../authAPI';
+
+const api = authAPI();
 
 const CadastroScreen = ({ route, navigation }) => {
   const { userType } = route.params || {};
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [dataNascimento, setDataNascimento] = useState('');
-  const [crmOuCpf, setCrmOuCpf] = useState('');
   const [senha, setSenha] = useState('');
 
   const handleCadastro = async () => {
-    // Implementar lógica de cadastro aqui
-    // Exemplo: validar campos, chamar API, etc.
-
-    // Supondo que você tenha uma função de cadastro assíncrona
     try {
-      // Chamar a função de cadastro aqui
-      // await api.cadastrarUsuario({ nome, email, dataNascimento, crmOuCpf, senha });
+      const response = await api.cadastrarUsuarioAPI(nome, email, senha);
 
-      // Redirecionar para a tela de login após o cadastro
+      console.log('Resposta do cadastro:', response);
+
       navigation.navigate('Login');
     } catch (error) {
-      console.error('Erro ao cadastrar:', error);
-      // Tratar erros de cadastro, exibir mensagem, etc.
+      console.error('Erro ao cadastrar usuário:', error.message);
     }
   };
 
@@ -32,8 +28,6 @@ const CadastroScreen = ({ route, navigation }) => {
         <Text style={styles.title}>Cadastro Screen ({userType})</Text>
         <TextInput style={styles.input} placeholder="Nome completo" value={nome} onChangeText={setNome} />
         <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
-        <TextInput style={styles.input} placeholder="Data de Nascimento (ex: DD/MM/)" value={dataNascimento} onChangeText={setDataNascimento} />
-        <TextInput style={styles.input} placeholder={userType === 'medico' ? 'CRM' : 'CPF'} value={crmOuCpf} onChangeText={setCrmOuCpf} />
         <TextInput style={styles.input} placeholder="Senha" secureTextEntry value={senha} onChangeText={setSenha} />
         <TouchableOpacity style={styles.buttonContainer} onPress={handleCadastro}>
           <View style={styles.button}>

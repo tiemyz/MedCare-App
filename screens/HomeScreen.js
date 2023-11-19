@@ -1,19 +1,33 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, ImageBackground, StyleSheet } from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ route, navigation }) => {
+  
+  console.log(route.params); 
+  
+  const { setUserType } = route.params || {};
+
+  const handleSelecionarTipoUsuario = (tipoUsuario) => {
+    if (setUserType) {
+      setUserType(tipoUsuario);
+      navigation.navigate('Cadastro', { userType: tipoUsuario });
+    } else {
+      console.error('Função setUserType não definida nos parâmetros do route.');
+    }
+  };
+
   return (
     <ImageBackground source={require('../assets/banner.png')} style={styles.background}>
       <View style={styles.container}>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: 'red' }]}
-          onPress={() => navigation.navigate('Cadastro', { userType: 'medico' })}
+          onPress={() => handleSelecionarTipoUsuario('medico')}
         >
           <Text style={styles.buttonText}>Sou Médico</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: 'white' }]}
-          onPress={() => navigation.navigate('Cadastro', { userType: 'paciente' })}
+          onPress={() => handleSelecionarTipoUsuario('paciente')}
         >
           <Text style={[styles.buttonText, { color: 'black' }]}>Sou Paciente</Text>
         </TouchableOpacity>
