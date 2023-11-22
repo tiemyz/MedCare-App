@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Image } from 'react-native';
-import authAPI from '../authAPI';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Image, Alert } from 'react-native';
+import authAPI from '../../authAPI';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import LoginFundo from '../assets/login-fundo.png';
-import MedcareLogoColor from '../assets/medcare-logo-color.png';
+import LoginFundo from '../../assets/login-fundo.png';
+import MedcareLogoColor from '../../assets/medcare-logo-color.png';
 
 const api = authAPI();
 
@@ -13,11 +13,17 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    // Validar se ambos os campos estão preenchidos
+    if (!email || !senha) {
+      Alert.alert('Campos vazios', 'Por favor, preencha todos os campos antes de entrar.');
+      return;
+    }
+
     try {
-      setLoading(true); 
+      setLoading(true);
 
       const loginResponse = await api.realizarLoginAPI(email, senha);
-      console.log('Resposta do login:', loginResponse); 
+      console.log('Resposta do login:', loginResponse);
 
       if (loginResponse.token) {
         console.log('Login bem-sucedido. Redirecionando...');
@@ -37,49 +43,46 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       console.error('Erro ao fazer login:', error.message);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
-      <ImageBackground source={LoginFundo} style={styles.background}>
-
-        <View style={{width: '90%', alignItems: 'center', marginTop: 150}}>
-
-            <View>
-                <Image source={MedcareLogoColor} style={{width: 186, height: 72, resizeMode: 'contain'}}></Image>
-            </View>
-
-
-            <TextInput
-            style={styles.input}
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            />
-
-            <TextInput
-            style={styles.input}
-            placeholder="Senha"
-            secureTextEntry
-            value={senha}
-            onChangeText={setSenha}
-            />
-
-            <TouchableOpacity onPress={handleLogin} disabled={loading} style={{backgroundColor: '#A7043B', width: '30%', alignItems: 'center', borderRadius: 30, padding: 10, margin: 20}}>
-            <View>
-                <Text style={styles.buttonText}>{loading ? 'Entrando...' : 'Entrar'}</Text>
-            </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={styles.cadastroLink}>Não tem conta?</Text>
-                    <Text style={styles.cadastroLinkColor}>Cadastre-se</Text>
-                </View>
-            </TouchableOpacity>
+    <ImageBackground source={LoginFundo} style={styles.background}>
+      <View style={{ width: '90%', alignItems: 'center', marginTop: 150 }}>
+        <View>
+          <Image source={MedcareLogoColor} style={{ width: 186, height: 72, resizeMode: 'contain' }}></Image>
         </View>
-      </ImageBackground>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={setSenha}
+        />
+
+        <TouchableOpacity onPress={handleLogin} disabled={loading} style={{ backgroundColor: '#A7043B', width: '30%', alignItems: 'center', borderRadius: 30, padding: 10, margin: 20 }}>
+          <View>
+            <Text style={styles.buttonText}>{loading ? 'Entrando...' : 'Entrar'}</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={styles.cadastroLink}>Não tem conta?</Text>
+            <Text style={styles.cadastroLinkColor}>Cadastre-se</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 

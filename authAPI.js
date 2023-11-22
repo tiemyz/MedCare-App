@@ -8,7 +8,7 @@ const authAPI = () => {
   const cadastrarUsuarioAPI = async (nome, email, dataNascimento, cpfCrm, senha) => {
     try {
       const tipoUsuario = email.includes('@medico.com') ? 'medico' : 'paciente';
-      const response = await api.post('/api/registrar', {
+      const response = await api.post('/api/usuarios/registrar', {
         nome,
         email,
         dataNascimento,
@@ -26,7 +26,7 @@ const authAPI = () => {
 
   const realizarLoginAPI = async (email, senha) => {
     try {
-      const response = await api.post('/api/login', {
+      const response = await api.post('/api/usuarios/login', {
         email,
         senha,
       });

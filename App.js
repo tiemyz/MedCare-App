@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './screens/LoginScreen';
-import CadastroScreen from './screens/CadastroScreen';
-import MedicoDashboard from './screens/MedicoDashboard';
-import PacienteDashboard from './screens/PacienteDashboard';
+import LoginScreen from './screens/identificacao/LoginScreen';
+import CadastroScreen from './screens/identificacao/CadastroScreen';
+import MedicoDashboard from './screens/medico/MedicoDashboard';
+import PacienteDashboard from './screens/paciente/PacienteDashboard';
 import HomeScreen from './screens/HomeScreen';
 import InfoWatch from './screens/InfoWatch';
-import MedicoPerfil from './screens/MedicoPerfil';
-import PacientePerfil from './screens/PacientePerfil';
+import MedicoPerfil from './screens/medico/MedicoPerfil';
+import PacientePerfil from './screens/paciente/PacientePerfil';
 import ChatScreen from './screens/ChatScreen';
 
 const Stack = createStackNavigator();

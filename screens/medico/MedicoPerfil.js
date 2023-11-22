@@ -1,9 +1,31 @@
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import FundoPerfil from '../assets/fundo-perfil.png';
-import IconPerfil from '../assets/icon-perfil.png';
+import FundoPerfil from '../../assets/fundo-perfil.png';
+import IconPerfil from '../../assets/icon-perfil.png';
 
 const MedicoPerfil = () => {
+
+  const [medicoDashboard, setMedicoDashboard] = useState([]);
+
+  useEffect(() => {
+    fetchMedicoDashboard();
+  }, []);
+
+  const fetchMedicoDashboard = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/usuarios/1'); 
+      const data = await response.json();
+      setMedicoDashboard(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!medicoDashboard) {
+    return <Text>Carregando informações...</Text>;
+  }
+
   return (
     <ImageBackground source={FundoPerfil} style={styles.background}>
       <View style={styles.viewPrincipal}>
@@ -11,6 +33,10 @@ const MedicoPerfil = () => {
         <View style={{flexDirection: 'row', justifyContent: 'flex-end', paddingHorizontal: 20, marginTop: 21}}>
           <TouchableOpacity>
             <Icon name="edit" size={30} color="#000" />
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Icon name="delete" size={30} color="#000" />
           </TouchableOpacity>
         </View>
 
@@ -21,24 +47,13 @@ const MedicoPerfil = () => {
         <View style={{alignItems: 'center', width: '100%'}}>
           <Text style={{fontSize: 20, marginBottom: 50}}>Médico (a):</Text>
 
-          <Text style={{fontSize: 20, marginBottom: 21}}>nome do médico - API</Text>
+          <Text style={{fontSize: 20, marginBottom: 21}}>{medicoDashboard.nome}</Text>
 
-          <Text style={{fontSize: 20, marginBottom: 21}}>CRM: </Text>
+          <Text style={{fontSize: 20, marginBottom: 21}}>CRM: {medicoDashboard.cpfCrm}</Text>
           <Text style={{fontSize: 20}}>Data de nascimento: </Text>
-          <Text style={{fontSize: 20, marginBottom: 21}}>api</Text>
+          <Text style={{fontSize: 20, marginBottom: 21}}>{medicoDashboard.dataNascimento}</Text>
           <Text style={{fontSize: 20}}>Email: </Text>
-          <Text style={{fontSize: 20, marginBottom: 24}}>api</Text>
-        </View>
-
-        {/* traço de divisão central*/}
-        <View style={{alignItems: 'center', marginBottom: 24}}>
-          <View style={{ borderBottomColor: "#000000", borderBottomWidth: 1, width: '70%'}}/>
-        </View>
-
-        <View style={{alignItems: 'center', marginBottom: 21}}>
-          <Text style={{fontSize: 18, marginBottom: 21}}>Atendimento presencial: </Text>
-          <Text style={{fontSize: 18, marginBottom: 21}}>Nome do local - API</Text>
-          <Text style={{fontSize: 18, marginBottom: 21}}>Endereço - API</Text>
+          <Text style={{fontSize: 20, marginBottom: 24}}>{medicoDashboard.email}</Text>
         </View>
       </View>
     </ImageBackground>

@@ -1,14 +1,36 @@
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import LogoMedCare from '../assets/medcare-logo.png';
-import LogoIcon from '../assets/logo-icon.png';
-import FundoHome from '../assets/fundo-home.png';
-import Ficha from '../assets/ficha.png';
-import Watch from '../assets/watch.png';
-import Chat from '../assets/chat.png';
-import Video from '../assets/video.png';
+import LogoMedCare from '../../assets/medcare-logo.png';
+import LogoIcon from '../../assets/logo-icon.png';
+import FundoHome from '../../assets/fundo-home.png';
+import Ficha from '../../assets/ficha.png';
+import Watch from '../../assets/watch.png';
+import Chat from '../../assets/chat.png';
+import Video from '../../assets/video.png';
 
-const PacienteDashboard = ({ navigation }) => {
+const MedicoDashboard = ({ navigation }) => {
+
+  const [medicoDashboard, setMedicoDashboard] = useState([]);
+
+  useEffect(() => {
+    fetchMedicoDashboard();
+  }, []);
+
+  const fetchMedicoDashboard = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/usuarios/1'); 
+      const data = await response.json();
+      setMedicoDashboard(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!medicoDashboard) {
+    return <Text>Carregando informações...</Text>;
+  }
+
   return (
     <ImageBackground source={FundoHome} style={styles.background}>
 
@@ -19,7 +41,7 @@ const PacienteDashboard = ({ navigation }) => {
           <Image source={LogoMedCare} style={{width: 124, height: 48, resizeMode: 'contain'}}></Image>
             <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('PacientePerfil')}
+                onPress={() => navigation.navigate('MedicoPerfil')}
                 style={{ marginRight: 10 }}>
                 <Icon name="account-circle" size={30} color="#000" />
               </TouchableOpacity>
@@ -30,10 +52,10 @@ const PacienteDashboard = ({ navigation }) => {
           </View>
         </View>
 
-        {/* view nome do paciente */}
+        {/* view nome do médico */}
         <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', width: '60%', paddingVertical: 5, justifyContent: 'center', borderRadius: 30, marginTop: 20}}>
           <Image source={LogoIcon} style={{width: 60, height: 39, resizeMode: 'contain'}}></Image>
-          <Text style={{color: '#000', fontSize: 20, marginLeft: 10}}>Olá, </Text>
+          <Text style={{color: '#000', fontSize: 20, marginLeft: 10}}>Olá, {medicoDashboard.nome}</Text>
         </View>
       </View>
 
@@ -42,11 +64,11 @@ const PacienteDashboard = ({ navigation }) => {
 
         {/* opções - area 1*/}
         <View>
-          <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 28}}>Informações do médico e monitoramento Watch</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 28}}>Informações e monitoramento do(a) paciente</Text>
 
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('MedicoPerfil')}
+              onPress={() => navigation.navigate('PacientePerfil')}
               style={{ alignItems: 'center', backgroundColor: '#FD9797', padding: 23, width: '30%', height: '100%', borderRadius: 30 }}
             >
               <Image source={Ficha} style={{ width: 50, height: 50, resizeMode: 'contain' }}></Image>
@@ -119,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PacienteDashboard;
+export default MedicoDashboard;

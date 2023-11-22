@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
-import authAPI from '../authAPI';
-import CadastroFundo from '../assets/cadastro-fundo-2.png';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
+import authAPI from '../../authAPI';
+import CadastroFundo from '../../assets/cadastro-fundo-2.png';
 
 const api = authAPI();
 
@@ -14,6 +14,12 @@ const CadastroScreen = ({ route, navigation }) => {
   const [senha, setSenha] = useState('');
 
   const handleCadastro = async () => {
+    // Validar se todos os campos estão preenchidos
+    if (!nome || !email || !dataNascimento || !cpfCrm || !senha) {
+      Alert.alert('Preencha todos os campos', 'Por favor, preencha todos os campos antes de cadastrar.');
+      return;
+    }
+
     try {
       const response = await api.cadastrarUsuarioAPI(nome, email, dataNascimento, cpfCrm, senha);
 
@@ -27,7 +33,7 @@ const CadastroScreen = ({ route, navigation }) => {
 
   return (
     <ImageBackground source={CadastroFundo} style={styles.background}>
-      <View style={{width: '90%', alignItems: 'center', marginTop: 150}}>
+      <View style={{ width: '90%', alignItems: 'center', marginTop: 150 }}>
         {/*<Text style={styles.title}>Sou {userType}</Text>*/}
         <TextInput style={styles.input} placeholder="Nome completo" value={nome} onChangeText={setNome} />
         <TextInput style={styles.input} placeholder="Email (médicos: @medico.com)" value={email} onChangeText={setEmail} />
