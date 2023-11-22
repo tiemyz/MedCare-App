@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Image } from 'react-native';
 import authAPI from '../authAPI';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import LoginFundo from '../assets/login-fundo.png';
+import MedcareLogoColor from '../assets/medcare-logo-color.png';
 
 const api = authAPI();
 
@@ -39,64 +42,95 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/banner.png')} style={styles.banner}>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          secureTextEntry
-          value={senha}
-          onChangeText={setSenha}
-        />
-        <TouchableOpacity onPress={handleLogin} disabled={loading}>
-          <View>
-            <Text style={styles.buttonText}>{loading ? 'Entrando...' : 'Entrar'}</Text>
-          </View>
-        </TouchableOpacity>
+      <ImageBackground source={LoginFundo} style={styles.background}>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Text style={styles.cadastroLink}>Não tem conta? Cadastre-se</Text>
-        </TouchableOpacity>
+        <View style={{width: '90%', alignItems: 'center', marginTop: 150}}>
+
+            <View>
+                <Image source={MedcareLogoColor} style={{width: 186, height: 72, resizeMode: 'contain'}}></Image>
+            </View>
+
+
+            <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            />
+
+            <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            secureTextEntry
+            value={senha}
+            onChangeText={setSenha}
+            />
+
+            <TouchableOpacity onPress={handleLogin} disabled={loading} style={{backgroundColor: '#A7043B', width: '30%', alignItems: 'center', borderRadius: 30, padding: 10, margin: 20}}>
+            <View>
+                <Text style={styles.buttonText}>{loading ? 'Entrando...' : 'Entrar'}</Text>
+            </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={styles.cadastroLink}>Não tem conta?</Text>
+                    <Text style={styles.cadastroLinkColor}>Cadastre-se</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
       </ImageBackground>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+
+  background: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  banner: {
-    width: '100%',
-    height: '100%',
     resizeMode: 'cover',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
+
   input: {
-    height: 40,
-    width: '80%',
-    borderColor: 'gray',
-    borderWidth: 1,
+    height: 55,
+    fontSize: 16,
+    width: '90%',
+    color: '#000',
+    fontWeight: 'bold',
+    paddingHorizontal: 20,
+    marginTop: 20,
+    borderRadius: 30,
     marginBottom: 10,
-    paddingLeft: 10,
     backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,  
+      height: 5, 
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
+
   buttonText: {
-    color: 'blue',
-    marginTop: 10,
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 15
   },
+
   cadastroLink: {
-    color: 'blue',
-    marginTop: 10,
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+
+  cadastroLinkColor: {
+    color: '#CF053F',
+    marginLeft: 5,
+    textDecorationLine: 'underline',
+    fontWeight: 'bold',
+    fontSize: 18
   },
 });
 

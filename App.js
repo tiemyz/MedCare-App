@@ -6,6 +6,10 @@ import CadastroScreen from './screens/CadastroScreen';
 import MedicoDashboard from './screens/MedicoDashboard';
 import PacienteDashboard from './screens/PacienteDashboard';
 import HomeScreen from './screens/HomeScreen';
+import InfoWatch from './screens/InfoWatch';
+import MedicoPerfil from './screens/MedicoPerfil';
+import PacientePerfil from './screens/PacientePerfil';
+import ChatScreen from './screens/ChatScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +37,24 @@ const App = () => {
           name="Home"
           component={HomeScreen}
           initialParams={{ setUserType: setUserType }}
+        />
+        <Stack.Screen
+          name="InfoWatch"
+          component={InfoWatch}
+        />
+        <Stack.Screen
+          name="MedicoPerfil"
+          component={MedicoPerfil}
+        />
+
+        <Stack.Screen
+          name="PacientePerfil"
+          component={PacientePerfil}
+        />
+        
+        <Stack.Screen
+          name="ChatScreen"
+          component={ChatScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, ImageBackground, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, ImageBackground, StyleSheet, Image } from 'react-native';
+import LoginFundo from '../assets/login-fundo.png';
+import MedcareLogoColor from '../assets/medcare-logo-color.png';
 
 const HomeScreen = ({ route, navigation }) => {
   
@@ -17,19 +19,26 @@ const HomeScreen = ({ route, navigation }) => {
   };
 
   return (
-    <ImageBackground source={require('../assets/banner.png')} style={styles.background}>
-      <View style={styles.container}>
+    <ImageBackground source={LoginFundo} style={styles.background}>
+        
+      <View style={{width: '90%', alignItems: 'center', marginTop: 120}}>
+
+        <View>
+            <Image source={MedcareLogoColor} style={{width: 186, height: 72, resizeMode: 'contain', marginBottom: 60}}></Image>
+        </View>
+
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: 'red' }]}
+          style={[styles.button, { backgroundColor: '#CF053F' }]}
           onPress={() => handleSelecionarTipoUsuario('medico')}
         >
-          <Text style={styles.buttonText}>Sou Médico</Text>
+          <Text style={styles.buttonText}>Sou médico</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[styles.button, { backgroundColor: 'white' }]}
           onPress={() => handleSelecionarTipoUsuario('paciente')}
         >
-          <Text style={[styles.buttonText, { color: 'black' }]}>Sou Paciente</Text>
+          <Text style={[styles.buttonText, { color: 'black' }]}>Sou paciente</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -41,24 +50,29 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   button: {
-    width: 200,
-    height: 50,
+    width: '90%',
     marginBottom: 20,
-    borderRadius: 10,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,  
+      height: 5, 
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
+
   buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#000',
+    fontSize: 25,
   },
 });
 

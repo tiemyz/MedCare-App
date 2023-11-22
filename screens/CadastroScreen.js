@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
 import authAPI from '../authAPI';
+import CadastroFundo from '../assets/cadastro-fundo-2.png';
 
 const api = authAPI();
 
@@ -8,11 +9,13 @@ const CadastroScreen = ({ route, navigation }) => {
   const { userType } = route.params || {};
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
+  const [cpfCrm, setCpfCrm] = useState('');
   const [senha, setSenha] = useState('');
 
   const handleCadastro = async () => {
     try {
-      const response = await api.cadastrarUsuarioAPI(nome, email, senha);
+      const response = await api.cadastrarUsuarioAPI(nome, email, dataNascimento, cpfCrm, senha);
 
       console.log('Resposta do cadastro:', response);
 
@@ -23,13 +26,15 @@ const CadastroScreen = ({ route, navigation }) => {
   };
 
   return (
-    <ImageBackground source={require('../assets/banner.png')} style={styles.background}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Cadastro Screen ({userType})</Text>
+    <ImageBackground source={CadastroFundo} style={styles.background}>
+      <View style={{width: '90%', alignItems: 'center', marginTop: 150}}>
+        {/*<Text style={styles.title}>Sou {userType}</Text>*/}
         <TextInput style={styles.input} placeholder="Nome completo" value={nome} onChangeText={setNome} />
-        <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+        <TextInput style={styles.input} placeholder="Email (médicos: @medico.com)" value={email} onChangeText={setEmail} />
+        <TextInput style={styles.input} placeholder="Data de nascimento (ex: 28/08/2002)" value={dataNascimento} onChangeText={setDataNascimento} />
+        <TextInput style={styles.input} placeholder="CRM (médicos) / CPF (pacientes)" value={cpfCrm} onChangeText={setCpfCrm} />
         <TextInput style={styles.input} placeholder="Senha" secureTextEntry value={senha} onChangeText={setSenha} />
-        <TouchableOpacity style={styles.buttonContainer} onPress={handleCadastro}>
+        <TouchableOpacity onPress={handleCadastro}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Cadastrar</Text>
           </View>
@@ -44,39 +49,49 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
+    alignItems: 'center'
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   title: {
-    fontSize: 20,
-    marginBottom: 20,
-    color: 'white',
+      fontSize: 25,
+      color: '#000',
+      marginTop: 50,
+      fontWeight: 'bold'    
   },
+
   input: {
-    height: 40,
-    width: '80%',
-    borderColor: 'gray',
-    borderWidth: 1,
+    height: 55,
+    fontSize: 16,
+    width: '90%',
+    color: 'gray',
+    fontWeight: 'bold',
+    paddingHorizontal: 20,
+    marginTop: 25,
+    borderRadius: 30,
     marginBottom: 10,
-    paddingLeft: 10,
     backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,  
+      height: 5, 
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  buttonContainer: {
-    width: '80%',
-    marginTop: 20,
-  },
+
   button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    alignItems: 'center',
-    borderRadius: 5,
+    backgroundColor: '#A7043B', 
+    width: '80%', 
+    alignItems: 'center', 
+    borderRadius: 30, 
+    padding: 10, 
+    margin: 20
   },
   buttonText: {
-    color: 'white',
-    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 15
   },
 });
 

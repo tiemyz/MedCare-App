@@ -5,12 +5,14 @@ const authAPI = () => {
     baseURL: "http://localhost:8080" 
   });
 
-  const cadastrarUsuarioAPI = async (nome, email, senha) => {
+  const cadastrarUsuarioAPI = async (nome, email, dataNascimento, cpfCrm, senha) => {
     try {
       const tipoUsuario = email.includes('@medico.com') ? 'medico' : 'paciente';
       const response = await api.post('/api/registrar', {
         nome,
         email,
+        dataNascimento,
+        cpfCrm,
         senha,
         tipoUsuario,
       });
