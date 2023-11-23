@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, TextInput, FlatList, StyleSheet, ImageBac
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PerfilWatch from '../assets/perfil-watch.png';
 
-const BASE_URL = 'http://localhost:8080/api/chat';
+const BASE_URL = 'http://medcare-veetor-systems-api.azurewebsites.net/api/chat';
 
 const ChatScreen = ({ route }) => {
   const [messages, setMessages] = useState([]);
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
     backgroundColor: 'white',
   },
-  
+
   sendButton: {
     backgroundColor: '#A7043B',
     borderRadius: 20,

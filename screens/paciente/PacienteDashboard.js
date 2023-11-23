@@ -19,7 +19,7 @@ const PacienteDashboard = ({ navigation }) => {
 
   const fetchPacienteDashboard = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/usuarios/2'); 
+      const response = await fetch('http://medcare-veetor-systems-api.azurewebsites.net/api/usuarios/2'); 
       const data = await response.json();
       setPacienteDashboard(data);
     } catch (error) {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 104
   },
-  
+
   background: {
     flex: 1,
     resizeMode: 'cover',

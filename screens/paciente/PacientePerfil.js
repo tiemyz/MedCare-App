@@ -20,7 +20,7 @@ const PacientePerfil = () => {
 
   const fetchPacienteDashboard = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/usuarios/2');
+      const response = await fetch('http://medcare-veetor-systems-api.azurewebsites.net/api/usuarios/2');
       const data = await response.json();
       setPacienteDashboard(data);
       setEditedPaciente({
@@ -50,7 +50,7 @@ const PacientePerfil = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/usuarios/${pacienteDashboard.id}`, {
+      const response = await fetch(`http://medcare-veetor-systems-api.azurewebsites.net/api/usuarios/${pacienteDashboard.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const PacientePerfil = () => {
   
   const handleSave = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/usuarios/${pacienteDashboard.id}`, {
+      const response = await fetch(`http://medcare-veetor-systems-api.azurewebsites.net/api/usuarios/${pacienteDashboard.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
