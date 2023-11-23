@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const authAPI = () => {
   const api = axios.create({
-    baseURL: "http://medcare-veetor-systems-api.azurewebsites.net" 
+    baseURL: "http://medcare-api-veesys.azurewebsites.net" 
   });
 
   const cadastrarUsuarioAPI = async (nome, email, dataNascimento, cpfCrm, senha) => {

@@ -19,7 +19,7 @@ const MedicoDashboard = ({ navigation }) => {
 
   const fetchMedicoDashboard = async () => {
     try {
-      const response = await fetch('http://medcare-veetor-systems-api.azurewebsites.net/api/usuarios/1'); 
+      const response = await fetch('http://medcare-api-veesys.azurewebsites.net/api/usuarios/1'); 
       const data = await response.json();
       setMedicoDashboard(data);
     } catch (error) {
