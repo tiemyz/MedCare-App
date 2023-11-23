@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, TextInput, FlatList, StyleSheet, ImageBac
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PerfilWatch from '../assets/perfil-watch.png';
 
-const BASE_URL = 'http://medcare-api-veesys.azurewebsites.net/api/chat';
+const BASE_URL = 'http://20.121.229.134:8080/api/chat';
 
 const ChatScreen = ({ route }) => {
   const [messages, setMessages] = useState([]);
