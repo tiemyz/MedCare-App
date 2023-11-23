@@ -57,6 +57,8 @@ const App = () => {
           component={ChatScreen}
         />
 
+        
+
       </Stack.Navigator>
     </NavigationContainer>
   );

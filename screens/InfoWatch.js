@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 30,
     width: '90%',
-    //height: '50%', //remover quando for colocar os texts do watch 
     padding: 20, 
     marginTop: 13,
     alignItems: 'center',
@@ -68,7 +67,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-
 
   background: {
     flex: 1,

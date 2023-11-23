@@ -34,9 +34,7 @@ const MedicoDashboard = ({ navigation }) => {
   return (
     <ImageBackground source={FundoHome} style={styles.background}>
 
-      {/* view superior*/}
       <View style={styles.viewSuperior}>
-        {/* view do logo e dos botôes*/}
         <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', paddingHorizontal: 20, width: '100%'}}>
           <Image source={LogoMedCare} style={{width: 124, height: 48, resizeMode: 'contain'}}></Image>
             <View style={{ flexDirection: 'row' }}>
@@ -52,17 +50,14 @@ const MedicoDashboard = ({ navigation }) => {
           </View>
         </View>
 
-        {/* view nome do médico */}
         <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', width: '60%', paddingVertical: 5, justifyContent: 'center', borderRadius: 30, marginTop: 20}}>
           <Image source={LogoIcon} style={{width: 60, height: 39, resizeMode: 'contain'}}></Image>
           <Text style={{color: '#000', fontSize: 20, marginLeft: 10}}>Olá, {medicoDashboard.nome}</Text>
         </View>
       </View>
 
-      {/* view inferior*/}
       <View style={styles.viewInferior}>
 
-        {/* opções - area 1*/}
         <View>
           <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 28}}>Informações e monitoramento do(a) paciente</Text>
 
@@ -85,24 +80,21 @@ const MedicoDashboard = ({ navigation }) => {
           </View>
         </View>
 
-        {/* traço de divisão central*/}
         <View style={{alignItems: 'center', marginVertical: 38}}>
           <View style={{ borderBottomColor: "#A7043B", borderBottomWidth: 1, width: '50%'}}/>
         </View>
 
-        {/* opções - area 2*/}
         <View>
-
           <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 28}}>Comunicação</Text>
 
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ChatScreen')}
-              style={{ alignItems: 'center', backgroundColor: '#FD9797', padding: 23, width: '30%', height: '100%', borderRadius: 30 }}
-            >
-              <Image source={Chat} style={{ width: 50, height: 50, resizeMode: 'contain' }}></Image>
-              <Text style={{ fontSize: 20 }}>Chat</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ChatScreen', { userId: 1 })}
+            style={{ alignItems: 'center', backgroundColor: '#FD9797', padding: 23, width: '30%', height: '100%', borderRadius: 30 }}
+          >
+            <Image source={Chat} style={{ width: 50, height: 50, resizeMode: 'contain' }}></Image>
+            <Text style={{ fontSize: 20 }}>Chat</Text>
+          </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => navigation.navigate('Video')}
@@ -112,7 +104,6 @@ const MedicoDashboard = ({ navigation }) => {
               <Text style={{ fontSize: 20 }}>Video call</Text>
             </TouchableOpacity>
           </View>
-
         </View>
       </View>
     </ImageBackground>
@@ -122,16 +113,9 @@ const MedicoDashboard = ({ navigation }) => {
 const styles = StyleSheet.create({
 
   viewSuperior: {
-    //backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 104
-  },
-
-  viewInferior: {
-    //backgroundColor: 'yellow'
-    
-
   },
 
   background: {

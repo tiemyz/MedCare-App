@@ -39,7 +39,6 @@ const MedicoPerfil = () => {
   };
 
   const handleCancel = () => {
-    // Reset editedMedico to the original values
     setEditedMedico({
       nome: medicoDashboard.nome,
       cpfCrm: medicoDashboard.cpfCrm,
@@ -55,18 +54,14 @@ const MedicoPerfil = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          // Inclua cabeçalhos de autenticação, se necessário
-          // 'Authorization': `Bearer ${seu_token}`,
         },
       });
   
       if (response.ok) {
         console.log('Usuário excluído com sucesso');
-        // Atualize o estado para refletir a exclusão
         setMedicoDashboard([]);
       } else {
         console.error('Erro ao excluir usuário:', response.status, response.statusText);
-        // Exiba detalhes do erro
         const errorData = await response.json();
         console.error('Detalhes do erro:', errorData);
       }
@@ -75,7 +70,6 @@ const MedicoPerfil = () => {
     }
   };
   
-
   const handleSave = async () => {
     try {
       const response = await fetch(`http://localhost:8080/api/usuarios/${medicoDashboard.id}`, {
@@ -88,7 +82,6 @@ const MedicoPerfil = () => {
   
       if (response.ok) {
         console.log('Usuário atualizado com sucesso');
-        // Atualiza o estado para refletir a edição
         setMedicoDashboard(editedMedico);
         setEditing(false);
       } else {
@@ -102,7 +95,6 @@ const MedicoPerfil = () => {
   if (!medicoDashboard) {
     return <Text>Carregando informações...</Text>;
   }
-
 
   return (
     <ImageBackground source={FundoPerfil} style={styles.background}>

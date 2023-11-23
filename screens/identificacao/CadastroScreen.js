@@ -14,7 +14,6 @@ const CadastroScreen = ({ route, navigation }) => {
   const [senha, setSenha] = useState('');
 
   const handleCadastro = async () => {
-    // Validar se todos os campos estão preenchidos
     if (!nome || !email || !dataNascimento || !cpfCrm || !senha) {
       Alert.alert('Preencha todos os campos', 'Por favor, preencha todos os campos antes de cadastrar.');
       return;
@@ -34,7 +33,6 @@ const CadastroScreen = ({ route, navigation }) => {
   return (
     <ImageBackground source={CadastroFundo} style={styles.background}>
       <View style={{ width: '90%', alignItems: 'center', marginTop: 150 }}>
-        {/*<Text style={styles.title}>Sou {userType}</Text>*/}
         <TextInput style={styles.input} placeholder="Nome completo" value={nome} onChangeText={setNome} />
         <TextInput style={styles.input} placeholder="Email (médicos: @medico.com)" value={email} onChangeText={setEmail} />
         <TextInput style={styles.input} placeholder="Data de nascimento (ex: 28/08/2002)" value={dataNascimento} onChangeText={setDataNascimento} />
@@ -59,10 +57,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-      fontSize: 25,
-      color: '#000',
-      marginTop: 50,
-      fontWeight: 'bold'    
+    fontSize: 25,
+    color: '#000',
+    marginTop: 50,
+    fontWeight: 'bold'    
   },
 
   input: {

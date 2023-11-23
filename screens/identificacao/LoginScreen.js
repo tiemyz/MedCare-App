@@ -13,7 +13,6 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    // Validar se ambos os campos estão preenchidos
     if (!email || !senha) {
       Alert.alert('Campos vazios', 'Por favor, preencha todos os campos antes de entrar.');
       return;
