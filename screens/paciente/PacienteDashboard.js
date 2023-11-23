@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LogoMedCare from '../../assets/medcare-logo.png';
@@ -52,7 +53,7 @@ const PacienteDashboard = ({ navigation }) => {
         </View>
 
         {/* view nome do paciente */}
-        <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', width: '60%', paddingVertical: 5, justifyContent: 'center', borderRadius: 30, marginTop: 20}}>
+        <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', width: '70%', paddingVertical: 5, justifyContent: 'center', borderRadius: 30, marginTop: 20}}>
           <Image source={LogoIcon} style={{width: 60, height: 39, resizeMode: 'contain'}}></Image>
           <Text style={{color: '#000', fontSize: 20, marginLeft: 10}}>Olá, {pacienteDashboard.nome}</Text>
         </View>
