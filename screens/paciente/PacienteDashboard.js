@@ -19,7 +19,7 @@ const PacienteDashboard = ({ navigation }) => {
 
   const fetchPacienteDashboard = async () => {
     try {
-      const response = await fetch('http://20.121.229.134:8080/api/usuarios/2'); 
+      const response = await fetch('http://20.242.180.32:8080/api/usuarios/2'); 
       const data = await response.json();
       setPacienteDashboard(data);
     } catch (error) {

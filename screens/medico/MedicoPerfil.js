@@ -20,7 +20,7 @@ const MedicoPerfil = () => {
 
   const fetchMedicoDashboard = async () => {
     try {
-      const response = await fetch('http://20.121.229.134:8080/api/usuarios/1');
+      const response = await fetch('http://20.242.180.32:8080/api/usuarios/1');
       const data = await response.json();
       setMedicoDashboard(data);
       setEditedMedico({
@@ -50,7 +50,7 @@ const MedicoPerfil = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://20.121.229.134:8080/api/usuarios/${medicoDashboard.id}`, {
+      const response = await fetch(`http://20.242.180.32:8080/api/usuarios/${medicoDashboard.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const MedicoPerfil = () => {
   
   const handleSave = async () => {
     try {
-      const response = await fetch(`http://20.121.229.134:8080/api/usuarios/${medicoDashboard.id}`, {
+      const response = await fetch(`http://20.242.180.32:8080/api/usuarios/${medicoDashboard.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

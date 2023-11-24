@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const authAPI = () => {
   const api = axios.create({
-    baseURL: "http://20.121.229.134:8080/" 
+    baseURL: "http://20.242.180.32:8080" 
   });
 
   const cadastrarUsuarioAPI = async (nome, email, dataNascimento, cpfCrm, senha) => {
