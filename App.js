@@ -1,3 +1,13 @@
+/*GRUPO: VEETOR SYSTEMS
+
+INTEGRANTES:
+RM95315 - Bruno Eduardo Caputo Paulino - 2TDSPG
+RM95122 - Felipe da Silva Galvão - 2TDSPG
+RM93960 - Isabella Piola Fernandes - 2TDSR
+RM95145 - Isabella Tiemy Hatamiya Silva - 2TDSPG
+RM94222 - Lethycia Moraes Maia - 2TDSPG
+*/ 
+
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
